@@ -1,0 +1,16 @@
+{
+  "name": "ecoroute-app",
+  "version": "1.0.0",
+  "description": "EcoRoute - Sustainable Commute & Green Points Tracker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^18.0.6",
+    "express": "^4.19.2",
+    "mongoose": "^9.11.1"
+  }
+}

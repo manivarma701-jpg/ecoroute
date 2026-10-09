@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoRoute - Sustainable Commute & Green Points Tracker</title>
+  <meta name="description" content="Calculate your carbon savings, pick eco-friendly commute modes (Walk, Cycle, Bus), and earn Green Points with EcoRoute.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Canvas Confetti for Celebration -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background Glow Accents -->
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+
+  <!-- Main Navigation Header -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="nav-brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-leaf"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Eco<span class="brand-highlight">Route</span></span>
+          <span class="brand-sub">Sustainable Commute Hub</span>
+        </div>
+      </div>
+
+      <!-- Quick User Status Pill -->
+      <div class="nav-user-pill" id="navProfilePill">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="User Profile" class="nav-avatar" id="navAvatar">
+        <div class="nav-user-info">
+          <span class="nav-user-name" id="navUserName">Alex Rivera</span>
+          <div class="nav-points-badge">
+            <i class="fa-solid fa-seedling"></i>
+            <span id="navGreenPoints">480</span> pts
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content App -->
+  <main class="container main-content">
+    
+    <!-- Hero Banner / Stats Highlights -->
+    <section class="hero-section">
+      <div class="hero-header">
+        <div class="hero-badge">
+          <i class="fa-solid fa-earth-americas"></i> Climate Positive Commuting
+        </div>
+        <h1 class="hero-title">Plan Your Commute. Save Carbon. Earn <span class="text-gradient">Green Points</span>.</h1>
+        <p class="hero-description">
+          Choose eco-friendly transportation like walking, cycling, or public transit. Track real-time CO₂ reductions compared to petrol cars and unlock rewards as you travel green.
+        </p>
+      </div>
+
+      <!-- User Profile & Impact Summary Card -->
+      <div class="profile-hero-card">
+        <div class="profile-main-info">
+          <div class="profile-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Profile" class="profile-img" id="profileAvatar">
+            <span class="online-indicator" title="Active Eco Commuter"></span>
+          </div>
+          <div class="profile-details">
+            <div class="profile-title-row">
+              <h2 class="profile-name" id="profileName">Alex Rivera</h2>
+              <span class="badge-tier" id="profileBadgeTier">
+                <i class="fa-solid fa-tree" id="profileBadgeIcon"></i> Forest Guardian
+              </span>
+            </div>
+            <p class="profile-member-since">Member since <span id="profileJoinDate">September 2026</span> • <span class="streak-text"><i class="fa-solid fa-fire text-orange"></i> <span id="profileStreak">7</span> Day Streak</span></p>
+            
+            <!-- Level progress bar -->
+            <div class="tier-progress-box">
+              <div class="tier-progress-labels">
+                <span>Current Tier Progress</span>
+                <span id="tierProgressLabel">480 / 750 pts to Earth Guardian</span>
+              </div>
+              <div class="tier-progress-track">
+                <div class="tier-progress-fill" id="tierProgressFill" style="width: 64%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Key Metric Counters -->
+        <div class="stats-grid">
+          <div class="stat-card green-highlight">
+            <div class="stat-icon-wrap bg-emerald">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value" id="statGreenPoints">480</div>
+              <div class="stat-label">Green Points Earned</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrap bg-teal">
+              <i class="fa-solid fa-smog"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value"><span id="statCo2Saved">18.6</span> <small>kg</small></div>
+              <div class="stat-label">CO₂ Emissions Saved</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrap bg-blue">
+              <i class="fa-solid fa-route"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value"><span id="statDistance">124.5</span> <small>km</small></div>
+              <div class="stat-label">Eco Distance Covered</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrap bg-amber">
+              <i class="fa-solid fa-calendar-check"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value" id="statTripsCount">22</div>
+              <div class="stat-label">Total Green Trips</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Planner and Dashboard Split Layout -->
+    <div class="dashboard-grid">
+      
+      <!-- LEFT COLUMN: Commute Mode Selector & Live Carbon Calculator -->
+      <section class="card planner-card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon bg-emerald-soft">
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+            <div>
+              <h2 class="card-title">Eco Commute Planner</h2>
+              <p class="card-subtitle">Select your transport mode & calculate estimated CO₂ savings</p>
+            </div>
+          </div>
+        </div>
+
+        <form id="commuteForm" class="commute-form" onsubmit="return false;">
+          
+          <!-- Step 1: Select Mode of Transport -->
+          <div class="form-group">
+            <label class="form-label">
+              <span class="step-badge">1</span> Choose Transport Mode
+            </label>
+            <div class="modes-selector-grid" id="modesContainer">
+              
+              <!-- Mode: Walk -->
+              <button type="button" class="mode-card active" data-mode="walk" id="modeBtnWalk">
+                <div class="mode-icon-circle mode-walk">
+                  <i class="fa-solid fa-person-walking"></i>
+                </div>
+                <div class="mode-info">
+                  <div class="mode-title">Walk</div>
+                  <div class="mode-rate">0g CO₂ • 15 pts/km</div>
+                </div>
+                <div class="mode-selected-check">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+              </button>
+
+              <!-- Mode: Cycle -->
+              <button type="button" class="mode-card" data-mode="cycle" id="modeBtnCycle">
+                <div class="mode-icon-circle mode-cycle">
+                  <i class="fa-solid fa-bicycle"></i>
+                </div>
+                <div class="mode-info">
+                  <div class="mode-title">Cycle</div>
+                  <div class="mode-rate">0g CO₂ • 12 pts/km</div>
+                </div>
+                <div class="mode-selected-check">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+              </button>
+
+              <!-- Mode: Bus / Public Transit -->
+              <button type="button" class="mode-card" data-mode="bus" id="modeBtnBus">
+                <div class="mode-icon-circle mode-bus">
+                  <i class="fa-solid fa-bus"></i>
+                </div>
+                <div class="mode-info">
+                  <div class="mode-title">Bus / Transit</div>
+                  <div class="mode-rate">68g CO₂ • 8 pts/km</div>
+                </div>
+                <div class="mode-selected-check">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Route & Distance Settings -->
+          <div class="form-group">
+            <div class="label-with-meta">
+              <label class="form-label" for="distanceInput">
+                <span class="step-badge">2</span> Commute Distance
+              </label>
+              <span class="distance-live-badge"><span id="distanceDisplay">5.0</span> km</span>
+            </div>
+
+            <!-- Slider + Number Input -->
+            <div class="slider-control-group">
+              <input type="range" id="distanceRange" class="styled-range" min="0.5" max="30" step="0.5" value="5.0">
+              <div class="input-with-unit">
+                <input type="number" id="distanceInput" class="distance-number-input" min="0.1" max="100" step="0.1" value="5.0">
+                <span class="unit-tag">km</span>
+              </div>
+            </div>
+
+            <!-- Quick Preset Distance Buttons -->
+            <div class="preset-chips">
+              <span class="preset-label">Quick select:</span>
+              <button type="button" class="chip-btn" data-km="2">2 km</button>
+              <button type="button" class="chip-btn active" data-km="5">5 km</button>
+              <button type="button" class="chip-btn" data-km="10">10 km</button>
+              <button type="button" class="chip-btn" data-km="15">15 km</button>
+              <button type="button" class="chip-btn" data-km="20">20 km</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Optional Origin & Destination -->
+          <div class="form-group route-points-group">
+            <label class="form-label">
+              <span class="step-badge">3</span> Trip Route (Optional)
+            </label>
+            <div class="locations-row">
+              <div class="location-field">
+                <i class="fa-solid fa-location-dot loc-icon start"></i>
+                <input type="text" id="startLocation" placeholder="Starting point (e.g. Home, Green Valley)" value="Eco Residence">
+              </div>
+              <div class="location-divider">
+                <i class="fa-solid fa-arrow-right-long"></i>
+              </div>
+              <div class="location-field">
+                <i class="fa-solid fa-flag-checkered loc-icon end"></i>
+                <input type="text" id="endLocation" placeholder="Destination (e.g. Campus, Office)" value="Innovation Tech Park">
+              </div>
+            </div>
+          </div>
+
+          <!-- LIVE ESTIMATED IMPACT CARD -->
+          <div class="impact-preview-card" id="impactPreviewBox">
+            <div class="impact-preview-header">
+              <span class="preview-tag"><i class="fa-solid fa-bolt"></i> Live Estimated Impact</span>
+              <span class="baseline-tag">vs. Petrol Car (192g/km)</span>
+            </div>
+
+            <div class="impact-metrics-row">
+              <div class="impact-metric">
+                <div class="metric-val text-green" id="calcCo2Saved">0.96 <span class="metric-unit">kg</span></div>
+                <div class="metric-label"><i class="fa-solid fa-cloud-arrow-down"></i> CO₂ Saved</div>
+              </div>
+              <div class="impact-metric">
+                <div class="metric-val text-emerald" id="calcPoints">+75 <span class="metric-unit">pts</span></div>
+                <div class="metric-label"><i class="fa-solid fa-seedling"></i> Green Points</div>
+              </div>
+              <div class="impact-metric">
+                <div class="metric-val text-amber" id="calcCalories">325 <span class="metric-unit">kcal</span></div>
+                <div class="metric-label"><i class="fa-solid fa-fire"></i> Calories Burned</div>
+              </div>
+            </div>
+
+            <!-- Visual Bar Comparison -->
+            <div class="emission-bar-container">
+              <div class="bar-labels">
+                <span>Trip Carbon Footprint:</span>
+                <span id="footprintComparisonText">100% cleaner than solo car</span>
+              </div>
+              <div class="comparison-bar">
+                <div class="bar-segment car-segment" style="width: 100%;" title="Car Baseline: 0.96 kg CO2">
+                  <span>Solo Car Baseline (0.96 kg)</span>
+                </div>
+                <div class="bar-segment mode-segment" id="modeEmissionBar" style="width: 0%;" title="Selected Mode: 0.00 kg CO2">
+                  <span id="modeBarText">0.00 kg</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Log Commute Action Button -->
+          <button type="button" class="btn-log-commute" id="btnLogCommute">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Log Commute & Earn <span id="btnPointsLabel">75</span> Points</span>
+          </button>
+        </form>
+      </section>
+
+      <!-- RIGHT COLUMN: Dashboard Tabs (Trip History, Community Leaderboard, Eco Rewards) -->
+      <section class="card dashboard-card">
+        
+        <!-- Dashboard Navigation Tabs -->
+        <div class="tab-header">
+          <button type="button" class="tab-btn active" data-tab="history" id="tabBtnHistory">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Recent Trips (<span id="historyCount">3</span>)</span>
+          </button>
+          <button type="button" class="tab-btn" data-tab="leaderboard" id="tabBtnLeaderboard">
+            <i class="fa-solid fa-trophy"></i>
+            <span>Eco Leaderboard</span>
+          </button>
+          <button type="button" class="tab-btn" data-tab="rewards" id="tabBtnRewards">
+            <i class="fa-solid fa-gift"></i>
+            <span>Green Rewards</span>
+          </button>
+        </div>
+
+        <!-- TAB PANE 1: Trips History -->
+        <div class="tab-pane active" id="paneHistory">
+          <div class="pane-header">
+            <h3 class="pane-title">Logged Commutes</h3>
+            <span class="pane-badge">Updated in real-time</span>
+          </div>
+
+          <div class="trips-list" id="tripsListContainer">
+            <!-- Dynamic Trip Items inserted via JS -->
+            <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading trips...</div>
+          </div>
+        </div>
+
+        <!-- TAB PANE 2: Leaderboard -->
+        <div class="tab-pane" id="paneLeaderboard">
+          <div class="pane-header">
+            <h3 class="pane-title">Eco Champions Leaderboard</h3>
+            <span class="pane-badge">Weekly Standings</span>
+          </div>
+
+          <div class="leaderboard-list" id="leaderboardListContainer">
+            <!-- Dynamic Leaderboard Items inserted via JS -->
+          </div>
+        </div>
+
+        <!-- TAB PANE 3: Rewards & Eco Perks -->
+        <div class="tab-pane" id="paneRewards">
+          <div class="pane-header">
+            <h3 class="pane-title">Redeem Green Points</h3>
+            <span class="pane-badge">Your Balance: <span id="rewardsPointsBalance">480</span> pts</span>
+          </div>
+
+          <div class="rewards-grid">
+            <div class="reward-card">
+              <div class="reward-icon bg-emerald"><i class="fa-solid fa-tree"></i></div>
+              <div class="reward-info">
+                <h4>Plant a Real Tree</h4>
+                <p>Partnered with Eden Reforestation Projects</p>
+                <div class="reward-cost">500 pts</div>
+              </div>
+              <button class="btn-claim-reward" onclick="claimReward('Tree Planted', 500)">Redeem</button>
+            </div>
+
+            <div class="reward-card">
+              <div class="reward-icon bg-amber"><i class="fa-solid fa-mug-hot"></i></div>
+              <div class="reward-info">
+                <h4>15% Off Eco Cafe</h4>
+                <p>Reusable cup partner coffee voucher</p>
+                <div class="reward-cost">250 pts</div>
+              </div>
+              <button class="btn-claim-reward" onclick="claimReward('Eco Cafe Voucher', 250)">Redeem</button>
+            </div>
+
+            <div class="reward-card">
+              <div class="reward-icon bg-teal"><i class="fa-solid fa-ticket"></i></div>
+              <div class="reward-info">
+                <h4>Free Transit Day Pass</h4>
+                <p>1-Day unlimited Metro & Bus travel</p>
+                <div class="reward-cost">400 pts</div>
+              </div>
+              <button class="btn-claim-reward" onclick="claimReward('Transit Day Pass', 400)">Redeem</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Reset / Demo Controls Footer -->
+        <div class="card-footer-controls">
+          <span class="api-status"><i class="fa-solid fa-signal text-green"></i> Backend API: Online (Express.js)</span>
+          <button type="button" class="btn-reset-demo" id="btnResetDemo" title="Reset Demo Profile">
+            <i class="fa-solid fa-rotate-left"></i> Reset Demo Stats
+          </button>
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- Eco Commute Facts & Tips Section -->
+    <section class="tips-section">
+      <h3 class="tips-header"><i class="fa-solid fa-lightbulb text-amber"></i> Why Sustainable Commuting Matters</h3>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fa-solid fa-person-walking"></i></div>
+          <div class="tip-content">
+            <h4>Walking & Health</h4>
+            <p>A 2 km brisk walk burns ~130 calories, keeps urban air clean, and produces zero particulate emissions.</p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fa-solid fa-bicycle"></i></div>
+          <div class="tip-content">
+            <h4>Cycling Efficiency</h4>
+            <p>Cycling is 3x faster than walking, uses 95% less energy than cars, and reduces carbon footprint to 0 kg/km.</p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-icon"><i class="fa-solid fa-bus"></i></div>
+          <div class="tip-content">
+            <h4>Public Transit Impact</h4>
+            <p>One full bus takes 40+ cars off the road, cutting traffic congestion and slashing per-commuter CO₂ by 65%.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Notification Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>
